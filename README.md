@@ -1,1 +1,1 @@
-''' I have recently started to learn python and this entire repo consists of the projects from the book called "The big book of small python projects". This entire folder is just to practice. None of these projects belong to me'''
+''' I have recently started to learn python and this entire repo consists of the projects that will help me sharpen my logic in python'''
