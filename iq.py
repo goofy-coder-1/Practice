@@ -34,7 +34,7 @@ result = find_iq(location)
 
 if result:
     cap, pop, reg = result
-    print("\n--------- COUNTRY DATA ---------")
+    print("\n--------- COUNTRY DATA -------")
     print(f"Country:    {location.title()}")
     print(f"Capital:    {cap}")
     print(f"Region:     {reg}")
