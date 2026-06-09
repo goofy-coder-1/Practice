@@ -7,5 +7,6 @@ def numbergeneration():
     finaloutput = int(final)
     return finaloutput
 
-generated = numbergeneration()
-print(generated)
+if __name__ == "__main__":
+    generated = numbergeneration()
+    print("Test generation:", generated)
