@@ -51,11 +51,11 @@ class BankSystem:
         with open(cls.CSV_FILE, mode="a", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
             
-            # If the file is brand new, write the headers first
+            
             if not file_exists:
                 writer.writerow(["Name", "Address", "Age", "PIN", "Capital", "Account Number"])
                 
-            # Write the user details
+            
             writer.writerow([
                 account.name, 
                 account.address, 
