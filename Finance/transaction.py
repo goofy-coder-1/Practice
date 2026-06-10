@@ -1,16 +1,16 @@
 import csv
 import os
+import json
+from datetime import datetime
 
-# Assuming your previous code is saved as main.py. 
-# We import BankSystem to handle new user registration seamlessly.
 try:
     from userdatabase import BankSystem
 except ImportError:
-    
-  BankSystem = None
+    BankSystem = None
 
 class TransactionManager:
     CSV_FILE = "bank_accounts.csv"
+    JSON_FILE = "transaction_history.json"  
 
     @classmethod
     def _read_all_rows(cls):
@@ -32,6 +32,32 @@ class TransactionManager:
             if header:
                 writer.writerow(header)
             writer.writerows(rows)
+
+    @classmethod
+    def _log_transaction(cls, account_num, name, action, amount=None):
+        """Helper method to log transaction events into a JSON array file."""
+        log_entry = {
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "account_number": str(account_num),
+            "name": name,
+            "action": action
+        }
+        
+        if amount is not None:
+            log_entry["amount"] = f"Rs. {amount}"
+
+        logs = []
+        if os.path.exists(cls.JSON_FILE):
+            try:
+                with open(cls.JSON_FILE, "r", encoding="utf-8") as file:
+                    logs = json.load(file)
+            except json.JSONDecodeError:
+                logs = []
+
+        logs.append(log_entry)
+
+        with open(cls.JSON_FILE, "w", encoding="utf-8") as file:
+            json.dump(logs, file, indent=4)
 
     @classmethod
     def authenticate_user(cls, account_num, pin):
@@ -68,7 +94,7 @@ class TransactionManager:
                 print("\nRedirecting to User Registration...\n")
                 BankSystem.register_new_user()
             else:
-                print("\n Registration system unavailable. Please run the main script.")
+                print("\nRegistration system unavailable. Please run the main script.")
             return
 
         elif user_type in ["registered", "reg", "r"]:
@@ -80,7 +106,7 @@ class TransactionManager:
                 user_row = cls.authenticate_user(acc_num, pin)
                 
                 if user_row:
-                    print(f"\n Authentication Successful! Welcome back, {user_row[0]}.")
+                    print(f"\nAuthentication Successful! Welcome back, {user_row[0]}.")
                     cls.transaction_menu(acc_num)
                 else:
                     print("\nInvalid Account Number or PIN. Access Denied.")
@@ -92,7 +118,6 @@ class TransactionManager:
     @classmethod
     def transaction_menu(cls, account_num):
         while True:
-            # Re-fetch user data every loop iteration to maintain real-time accuracy
             _, rows = cls._read_all_rows()
             user_row = next(row for row in rows if row and row[5].strip() == str(account_num).strip())
             
@@ -118,13 +143,15 @@ class TransactionManager:
                 try:
                     amount = int(input("Enter amount to deposit: "))
                     if amount <= 0:
-                        print(" Amount must be greater than zero.")
+                        print("Amount must be greater than zero.")
                         continue
                     
                     current_capital = int(user_row[4])
                     new_capital = current_capital + amount
                     
                     cls.update_account_in_csv(account_num, column_index=4, new_value=new_capital)
+                    cls._log_transaction(account_num, user_row[0], "Deposit", amount)
+                    
                     print(f"Successfully deposited Rs. {amount}. New Balance: Rs. {new_capital}")
                 except ValueError:
                     print("Invalid amount format.")
@@ -133,7 +160,7 @@ class TransactionManager:
                 try:
                     amount = int(input("Enter amount to withdraw: "))
                     if amount <= 0:
-                        print(" Amount must be greater than zero.")
+                        print("Amount must be greater than zero.")
                         continue
                     
                     current_capital = int(user_row[4])
@@ -142,9 +169,11 @@ class TransactionManager:
                     else:
                         new_capital = current_capital - amount
                         cls.update_account_in_csv(account_num, column_index=4, new_value=new_capital)
+                        cls._log_transaction(account_num, user_row[0], "Withdrawal", amount)
+                        
                         print(f"Successfully withdrew Rs. {amount}. Remaining Balance: Rs. {new_capital}")
                 except ValueError:
-                    print(" Invalid amount format.")
+                    print("Invalid amount format.")
 
             elif choice == "4":
                 try:
@@ -152,18 +181,20 @@ class TransactionManager:
                     confirm_pin = int(input("Confirm your new PIN: "))
                     
                     if new_pin != confirm_pin:
-                        print(" PIN mismatch! Operation aborted.")
+                        print("PIN mismatch! Operation aborted.")
                     else:
                         cls.update_account_in_csv(account_num, column_index=3, new_value=new_pin)
+                        cls._log_transaction(account_num, user_row[0], "PIN Change")
+                        
                         print("PIN updated successfully!")
                 except ValueError:
-                    print(" PIN must be a valid number string.")
+                    print("PIN must be a valid number string.")
 
             elif choice == "5":
                 print("\nThank you for banking with us. Goodbye!")
                 break
             else:
-                print(" Invalid selection. Please choose options between 1 and 5.")
+                print("Invalid selection. Please choose options between 1 and 5.")
 
 
 if __name__ == "__main__":
