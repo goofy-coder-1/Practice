@@ -64,7 +64,7 @@ class StudentDatabase:
         print(f"\nSuccessfully saved {student.name} to the database!")
 
 
-# --- Interactive Terminal Menu ---
+
 def main():
     while True:
         print("\n=== STUDENT DATABASE MENU ===")
