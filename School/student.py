@@ -21,7 +21,7 @@ class Student:
 
 
 class StudentDatabase:
-    """Handles all File I/O operations for students using OOP principles."""
+    """Handles all File I/O operations for students."""
     CSV_FILE = "student_database.csv"
 
     @classmethod
@@ -36,8 +36,8 @@ class StudentDatabase:
             
             for row in reader:
                 if row:
-                    # Check unique Student ID (index 3) or Exact Name (index 0)
-                    if (row[3].strip() == str(student_id).strip() or 
+                    
+                    if (row[3].strip().lower() == str(student_id).strip().lower() or 
                         row[0].strip().lower() == name.strip().lower()):
                         return True
         return False
@@ -46,8 +46,6 @@ class StudentDatabase:
     def save_to_csv(cls, student):
         """Appends the student object's data into the CSV file."""
         file_exists = os.path.exists(cls.CSV_FILE)
-
-        # Fix: Ensure headers exactly match the 5 properties we are saving
         headers = ["Name", "Address", "Age", "StudentID", "Grade"]
 
         with open(cls.CSV_FILE, mode="a", newline="", encoding="utf-8") as file:
@@ -63,17 +61,50 @@ class StudentDatabase:
                 student.student_id, 
                 student.grade
             ])
-        print(f"Successfully saved {student.name} to database!")
+        print(f"\nSuccessfully saved {student.name} to the database!")
 
-# --- Quick Test ---
-if __name__ == "__main__":
-    # Create a new student object
-    new_student = Student("Alice Smith", "123 Maple St", 15, "STU101", "10th Grade")
-    
-    # Check if they exist, if not, save them
-    if not StudentDatabase.check_if_exists(new_student.name, new_student.student_id):
-        StudentDatabase.save_to_csv(new_student)
-    else:
-        print("Student already exists in the database!")
+
+# --- Interactive Terminal Menu ---
+def main():
+    while True:
+        print("\n=== STUDENT DATABASE MENU ===")
+        print("1. Add a New Student")
+        print("2. Exit")
         
-    new_student.display_details()
+        choice = input("Select an option (1-2): ").strip()
+        
+        if choice == "1":
+            print("\n--- Enter Student Information ---")
+            name = input("Enter Name: ").strip()
+            address = input("Enter Address: ").strip()
+            
+           
+            while True:
+                try:
+                    age = int(input("Enter Age: "))
+                    break
+                except ValueError:
+                    print("Invalid input. Please enter a number for age.")
+            
+            student_id = input("Enter Student ID: ").strip()
+            grade = input("Enter Grade/Class: ").strip()
+            
+            
+            if StudentDatabase.check_if_exists(name, student_id):
+                print("\nError: A student with this Name or ID already exists!")
+            else:
+                
+                new_student = Student(name, address, age, student_id, grade)
+                
+               
+                StudentDatabase.save_to_csv(new_student)
+                new_student.display_details()
+                
+        elif choice == "2":
+            print("Exiting program. Goodbye!")
+            break
+        else:
+            print("Invalid choice, please select 1 or 2.")
+
+if __name__ == "__main__":
+    main()
