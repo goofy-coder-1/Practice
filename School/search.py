@@ -43,5 +43,5 @@ if __name__ == "__main__":
         search_student_history()
         cont = input("Search for another student? (y/n): ").strip().lower()
         if cont != 'y':
-            print("Exiting search engine. Goodbye!")
+            print("Exiting search engine. Goodbye fam!")
             break
