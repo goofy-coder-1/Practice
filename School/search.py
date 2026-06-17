@@ -31,7 +31,7 @@ def search_student_history():
             print(f"--------------------------------------------------")
             total_score += entry['score']
             
-        # Fun extra feature: Calculate their historical average scor
+        # Fun extra feature: Calculate their historical average score
         average = total_score / len(records)
         print(f"Cumulative Average Score: {average:.2f}%")
         print(f"=================================================\n")
