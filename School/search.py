@@ -34,7 +34,7 @@ def search_student_history():
         # Fun extra feature: Calculate their historical average score
         average = total_score / len(records)
         print(f"Cumulative Average Score: {average:.2f}%")
-        print(f"=================================================\n")
+        print(f"==================================================\n")
     else:
         print(f"\nNo performance history found for Student ID: {student_id}")
 
