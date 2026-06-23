@@ -35,8 +35,31 @@ class StudentBase:
     CSV_FILE = "student_base.csv"
 
     @classmethod
-    def existence_checking(cls):
+    def existence_checking(cls, name, age, address):
         if not os.path.exists(cls.CSV_FILE):
             return False
         
-        with open(cls.CSV_FILE, mode='r', newline='utf-8')
+        with open(cls.CSV_FILE, mode='r', newline='', encoding='utf-8') as file:
+            reader = csv.reader(file)
+            next(reader, None)
+
+        for row in reader:
+            if row:
+                if(row[0].strip().lower() == name.strip().lower() and 
+                    row[1].strip().lower() == address.strip().lower() and 
+                        row[2].strip() == str(age).strip()):
+                        return True
+        return False
+    
+    @classmethod
+    def saving_csv(cls, account):
+        file_exists = os.path.exists(cls.CSV_FILE)
+
+        with open(cls.CSV_FILE, mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+
+            if not file_exists:
+                writer.writerow(["Name", "Age", "Address", "Room_Number", "Level", "StudentID"])
+            
+        
+                
