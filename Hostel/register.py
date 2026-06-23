@@ -89,7 +89,7 @@ class StudentBase:
             confirmation = input("Do you want to save these details? (yes/no): ").strip().lower()
             
             if confirmation in ["yes", "y"]:
-                cls.save_to_csv(student_account)
+                cls.saving_csv(student_account)
                 print("Account successfully created and recorded in database!")
                 return student_account
             else:
