@@ -61,5 +61,14 @@ class StudentBase:
             if not file_exists:
                 writer.writerow(["Name", "Age", "Address", "Room_Number", "Level", "StudentID"])
             
+            writer.writerow([
+                account.name,
+                account.age,
+                account.address,
+                account.room_number,
+                account.Level,
+                account.student_id
+            ])
+            
         
                 
