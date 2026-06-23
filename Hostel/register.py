@@ -69,6 +69,39 @@ class StudentBase:
                 account.Level,
                 account.student_id
             ])
+        
+    @classmethod
+    def new_student(cls):
+        try:
+            name = input("Enter name of student: ")
+            age = input("Enter age of student: ")
+            address = input("Enter address of student: ")
+
+            if cls.existence_checking(name, age, address):
+                print("Registration failed as system already has given detail")
+                return None
             
+            room_number = input("Room number: ")
+            Level = input("Students level of study: ")
+            
+            student_account = studentDetail(name, age, address, room_number, Level)
+            student_account.displayDetails()
+            confirmation = input("Do you want to save these details? (yes/no): ").strip().lower()
+            
+            if confirmation in ["yes", "y"]:
+                cls.save_to_csv(student_account)
+                print("Account successfully created and recorded in database!")
+                return student_account
+            else:
+                print("Registration cancelled by user. Data was not saved.")
+                return None
+
+        except ValueError:
+            print("\nInput error detected!\n")
+            return None
+
+
+if __name__ == "__main__":
+    active_account = StudentBase.new_student()
         
                 
