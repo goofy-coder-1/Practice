@@ -105,4 +105,4 @@ class StudentBase:
 if __name__ == "__main__":
     active_account = StudentBase.new_student()
 
-#remaining will be continued tomorrow or maybe the day after tomorrow or maybe later or 
+#remaining will be continued tomorrow or maybe the day after tomorrow or maybe later or maybe
