@@ -112,7 +112,7 @@ def delete_student_web():
     student_id = request.form['student_id']
     reason = request.form['reason']
     delete_student(student_id, reason)
-    return redirect(url_for('dashboard')) # Redirects back
+    return redirect(url_for('dashboard')) # Redirects
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
