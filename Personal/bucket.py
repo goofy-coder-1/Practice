@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import Optional, List
 
 
-# ============= MODEL LAYER ============
+# ============= MODEL LAYER =============
 class Place:
     """Represents a single place in the bucket list"""
     
