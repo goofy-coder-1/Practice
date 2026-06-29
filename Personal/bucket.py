@@ -271,7 +271,7 @@ class BucketListService:
         place = self.repository.get_by_name(old_name)
         
         if not place:
-            print(f"✗ Place '{old_name}' not found.")
+            print(f"Place '{old_name}' not found.")
             return
         
         print("\nCurrent details:")
