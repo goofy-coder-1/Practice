@@ -5,7 +5,7 @@ class Place:
         self.name = name
         self.address = address
         self.reason = reason
-        self.datetime = added_date or datetime.now().strftime("%Y-%m-%d %H-%M-%S")
+        self.added_date = added_date or datetime.now().strftime("%Y-%m-%d %H-%M-%S")
 
     def display(self):
         print("\n"+"="*40)
@@ -15,7 +15,7 @@ class Place:
         print(f"Added Date      : {self.added_date}")
         print("\n"+"="*40)
 
-    def tolist(self) -> list:
+    def to_list(self) -> list:
         return [self.name, self.address, self.reason, self.added_date]
     
     @staticmethod
