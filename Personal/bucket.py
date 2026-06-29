@@ -72,4 +72,4 @@ class personalBase:
         return None
     
 if __name__ == "__main__":
-    active_place = personalBase.register_new_place() # not working
+    active_place = personalBase.register_new_place() 
