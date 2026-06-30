@@ -21,7 +21,7 @@ class BucketListApp:
         print("="*40)
     
     def run(self):
-        
+        """this person is shit"""
         while True:
             self.display_menu()
             choice = input("Enter your choice (1-6): ").strip()
