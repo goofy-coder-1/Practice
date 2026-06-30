@@ -24,4 +24,4 @@ class Place:
         added_date = data[3] if len(data) > 3 else None
         return Place(name, address, reason, added_date)
     
-    #kehi bujhne pryas jari chha
+    #kehi bujhne pryas jari chha hai
