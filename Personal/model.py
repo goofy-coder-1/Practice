@@ -9,7 +9,7 @@ class Place:
 
     def display(self):
         print("\n"+"="*40)
-        print(f"Place Name      : {self.name}")
+        print(f"Place Name       : {self.name}")
         print(f"Address         : {self.address}")
         print(f"Reason to Visit : {self.reason}")
         print(f"Added Date      : {self.added_date}")
