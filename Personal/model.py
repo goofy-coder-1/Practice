@@ -12,7 +12,7 @@ class Place:
         print(f"Place Name       : {self.name}")
         print(f"Address          : {self.address}")
         print(f"Reason to Visit  : {self.reason}")
-        print(f"Added Date       : {self.added_date}")
+        print(f"Added Date      : {self.added_date}")
         print("\n"+"="*40)
 
     def to_list(self) -> list:
