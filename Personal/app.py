@@ -22,6 +22,9 @@ class BucketListApp:
     
     def run(self):
         """this person is shit"""
+        """yooo"""
+        """yooo"""
+        """yoooo"""
         while True:
             self.display_menu()
             choice = input("Enter your choice (1-6): ").strip()
