@@ -21,7 +21,7 @@ class BucketListApp:
         print("="*40)
     
     def run(self):
-        """Run the application with interactive menu"""
+        
         while True:
             self.display_menu()
             choice = input("Enter your choice (1-6): ").strip()
