@@ -35,3 +35,5 @@ class ItemOperations:
                  
             writer.writerow([item.name, item.category, item.price, item.added_date])
             print(f"Success: Product '{item.name}' added successfully.")
+
+            
