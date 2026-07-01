@@ -19,7 +19,9 @@ class ItemOperations:
         return False
     
     @classmethod
+    
     def AddProduct(cls, item):
+        """Adding products"""
         if cls.ProductChecking(item.name):
             print(f"Error: Product '{item.name}' already exists.")
             return False
