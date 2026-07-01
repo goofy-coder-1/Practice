@@ -1,5 +1,3 @@
-import csv
-import os
 from datetime import datetime
 
 class ItemStructure:
@@ -12,4 +10,9 @@ class ItemStructure:
     def DisplayDetails(self):
           print("\n"+"="*40)
           print("="*20+"Details Below"+"="*20)
-          
+          print(f"Name         :   {self.name}")
+          print(f"Category     :   {self.category}")
+          print(f"Price        :   {self.price}")
+          print(f"Added Date   :   {self.added_date}")
+
+
