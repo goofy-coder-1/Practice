@@ -23,3 +23,21 @@ class Product:
         print(f"Quantity in Stock: {self.quantity}")
         print(f"Added Date      : {self.added_date}")
         print("="*50)
+
+    def display_compact(self):
+        """Display product in compact format (for lists)"""
+        print(f"[{self.product_id}] {self.name} - ${self.price:.2f} (Stock: {self.quantity})")
+
+    def is_out_of_stock(self) -> bool:
+        """Check if product is out of stock"""
+        return self.quantity <= 0
+    
+    @staticmethod
+    def from_list(data: list) -> 'Product':
+        """Create Product object from CSV row"""
+        product_id, name, category = data[0], data[1], data[2]
+        price = float(data[3])
+        quantity = int(data[4])
+        added_date = data[5] if len(data) > 5 else None
+        return Product(product_id, name, category, price, quantity, added_date)
+        
