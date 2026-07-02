@@ -54,3 +54,11 @@ class CartItem:
     def display(self):
         """Display cart item details"""
         print(f"{self.product.name:20} x {self.quantity:3} @ ${self.product.price:7.2f} = ${self.get_total():7.2f}")
+
+class ShoppingCart:
+    
+    def __init__(self):
+        self.items = {}
+
+    def add_item(self, product: Product, quantity : int) -> bool:
+        """Add item to cart"""
