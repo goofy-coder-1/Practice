@@ -41,3 +41,16 @@ class Product:
         added_date = data[5] if len(data) > 5 else None
         return Product(product_id, name, category, price, quantity, added_date)
         
+class CartItem:
+    
+    def __init__(self, product: Product, quantity : int):
+        self.product = product
+        self.quantity = quantity
+
+    def get_total(self) -> float:
+        """To see the total price"""
+        return self.product.price * self.quantity
+    
+    def display(self):
+        """Display cart item details"""
+        print(f"{self.product.name:20} x {self.quantity:3} @ ${self.product.price:7.2f} = ${self.get_total():7.2f}")
