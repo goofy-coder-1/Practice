@@ -62,3 +62,11 @@ class ShoppingCart:
 
     def add_item(self, product: Product, quantity : int) -> bool:
         """Add item to cart"""
+        if quantity <= 0:
+            return False
+        
+        if product.product_id in self.items:
+              self.items[product.product_id].quantity += quantity
+        else:
+            self.items[product.product_id] = CartItem(product, quantity)
+        return True
