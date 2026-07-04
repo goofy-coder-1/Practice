@@ -1,37 +1,37 @@
 import requests
 
-class GitHubClient:
+class GitHubUser:
     def __init__(self, username):
         self.username = username
-        self.base_url = "https://api.github.com"
+        self.__base_url = "https://api.github.com/users/"
 
-    def fetch_profile(self):
-        """Fetches the user's profile data."""
-        url = f"{self.base_url}/users/{self.username}"
-        response = requests.get(url)
-        
-        if response.status_code == 200:
+    def fetch_data(self):
+        """Fetches the raw JSON data for the specific user."""
+        try:
+            response = requests.get(f"{self.__base_url}{self.username}")
+            response.raise_for_status() # Raises an error for bad status codes
             return response.json()
-        elif response.status_code == 404:
-            return {"error": "User not found."}
-        else:
-            return {"error": f"Failed with status code {response.status_code}"}
+        except requests.exceptions.HTTPError:
+            return None
 
-    def display_info(self):
-        """Prints a formatted summary of the profile."""
-        data = self.fetch_profile()
+    def display_profile(self):
+        """Processes and prints the user data."""
+        data = self.fetch_data()
         
-        if "error" in data:
-            print(data["error"])
-        else:
-            print(f"--- GitHub Profile: {data.get('login')} ---")
-            print(f"Name: {data.get('name')}")
-            print(f"Bio: {data.get('bio')}")
-            print(f"Public Repos: {data.get('public_repos')}")
-            print(f"Followers: {data.get('followers')}")
-            print(f"URL: {data.get('html_url')}")
+        if not data:
+            print(f"Error: Could not find user '{self.username}'.")
+            return
 
-# Usage
+        print(f"\n--- Profile for: {data.get('login')} ---")
+        print(f"Name: {data.get('name') or 'N/A'}")
+        print(f"Bio: {data.get('bio') or 'No bio provided'}")
+        print(f"Location: {data.get('location') or 'N/A'}")
+        print(f"Followers: {data.get('followers')}")
+        print(f"Public Repos: {data.get('public_repos')}")
+        print(f"Link: {data.get('html_url')}")
+
+# User Input
 if __name__ == "__main__":
-    user = GitHubClient("github") # Example: fetching the official 'github' profile
-    user.display_info()
+    target_user = input("Enter a GitHub username to search: ")
+    profile = GitHubUser(target_user)
+    profile.display_profile()
