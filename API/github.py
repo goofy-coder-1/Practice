@@ -9,7 +9,7 @@ class GitHubUser:
         """Fetches the raw JSON data for the specific user."""
         try:
             response = requests.get(f"{self.__base_url}{self.username}")
-            response.raise_for_status() # Raises an error for bad status codes
+            response.raise_for_status()
             return response.json()
         except requests.exceptions.HTTPError:
             return None
