@@ -32,6 +32,6 @@ class GitHubUser:
 
 # User Input
 if __name__ == "__main__":
-    target_user = input("Enter a GitHub username to search:  ")
+    target_user = input("Enter a GitHub username to search: ")
     profile = GitHubUser(target_user)
     profile.display_profile()
