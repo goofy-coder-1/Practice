@@ -4,7 +4,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"message": "Hello! My first API is running."}
+    return {"message": "My first API is running."}
 
 @app.get("/predict")
 def predict(value: float):
