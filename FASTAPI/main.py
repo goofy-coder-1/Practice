@@ -8,6 +8,6 @@ def read_root():
 
 @app.get("/predict")
 def predict(value: float):
-    # In the future, this is where you will load your ML model!
+    # In the future, this is where you will
     result = value * 2
     return {"input": value, "prediction": result}
