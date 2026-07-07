@@ -7,5 +7,5 @@ async def root():
    return {"Message" : "Hello world"}
 
 @app.get("/item/{item_id}")
-async def read_item(item_id):
+async def read_item(item_id: int):
    return {"Item Id" : item_id}
