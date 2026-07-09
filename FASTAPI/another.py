@@ -23,7 +23,7 @@ async def calculator(a: int, b: int, op: str):
                 return {"error": "Cannot divide by zero"}
             result = a / b
         case _:
-            return {"error": "Invalid operation"}
+            return {"Error": "Invalid operation"}
             
     return {"result": result}
 
