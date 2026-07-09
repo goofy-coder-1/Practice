@@ -39,6 +39,6 @@ async def read_item(item_id: str, q: str | None = None, short: bool = False):
         item.update({"q": q})
     if not short:
         item.update(
-            {"description": "This is an amazing thing that has a long description"}
+            {"description": "This is an amazing product that has a long description"}
         )
     return item
