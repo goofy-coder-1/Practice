@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-fake_items_db = [{"item_name": "why"}, {"item_name": "Bar"}, {"item_name": "dahi"}]
+fake_items_db = [{"item_name": "Hellokitty"}, {"item_name": "Bar"}, {"item_name": "dahi"}]
 
 
 @app.get("/items/")
